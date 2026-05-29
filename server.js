@@ -44,7 +44,7 @@ app.get('/api/movie', async (req, res) => {
 });
 
 // Fallback path handler to redirect users smoothly back to your main UI page
-app.get('/*splat', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
