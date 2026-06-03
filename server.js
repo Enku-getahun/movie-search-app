@@ -1,26 +1,20 @@
-// Load environment variables immediately at the very top
 require('dotenv').config();
 
 const express = require('express');
 const path = require('path');
 
-// Dynamically use node-fetch depending on your version.
 //const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const API_KEY = process.env.OMDB_API_KEY;
 
-// Check to make sure the key is present on startup
 if (!API_KEY) {
     console.error("CRITICAL ERROR: OMDB_API_KEY is missing in your environment!");
     process.exit(1);
 }
 
-// Serve static front-end assets cleanly
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Secure server-side routing bridge for movie lookups
 app.get('/api/movie', async (req, res) => {
     try {
         const movieTitle = req.query.title;
@@ -43,7 +37,6 @@ app.get('/api/movie', async (req, res) => {
     }
 });
 
-// Fallback path handler to redirect users smoothly back to your main UI page
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
