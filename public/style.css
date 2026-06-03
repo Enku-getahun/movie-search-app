@@ -1,7 +1,4 @@
-/* ==========================================================================
-   1. GLOBAL SYSTEM SETUP
-   ========================================================================== */
-* {
+ {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -19,14 +16,11 @@ body {
     padding: 40px 20px;
 }
 
-/* Utility layout toggles handled by JS */
+
 .hidden-layout {
     display: none !important;
 }
 
-/* ==========================================================================
-   2. REFINED AUTHENTICATION PANEL
-   ========================================================================== */
 #login-container {
     width: 100%;
     max-width: 420px;
@@ -133,10 +127,6 @@ body {
     color: #7dd3fc;
 }
 
-/* ==========================================================================
-   3. MAIN INTERFACE & APP LAYOUT
-   ========================================================================== */
-#main-app {
     width: 100%;
     max-width: 1000px;
     display: flex;
@@ -190,7 +180,6 @@ body {
     margin-bottom: 35px;
 }
 
-/* Search bar cluster architecture */
 .search-box-wrapper {
     width: 100%;
     max-width: 580px;
@@ -236,10 +225,6 @@ body {
 #search-btn:hover {
     background: #7dd3fc;
 }
-
-/* ==========================================================================
-   4. MOVIE PRESENTATION CARD CAROUSEL/GRID
-   ========================================================================== */
 #movies-grid {
     width: 100%;
     display: flex;
@@ -331,9 +316,7 @@ body {
     border-radius: 8px;
     border: 1px dashed rgba(255, 255, 255, 0.1);
 }
-/* ==========================================================================
-   5. NETFLIX-STYLE SHOWCASE SCROLL ROWS
-   ========================================================================== */
+
    .showcase-container {
     width: 100%;
     display: flex;
@@ -365,7 +348,6 @@ body {
     scroll-behavior: smooth;
 }
 
-/* Hide native scrollbar while preserving scrolling capability */
 .poster-scroll-row::-webkit-scrollbar {
     height: 6px;
 }
@@ -381,7 +363,6 @@ body {
     background: #38bdf8;
 }
 
-/* Compact Netflix Showcase Card Minimal Spec */
 .showcase-card {
     flex: 0 0 200px; /* Locked card width sizing */
     background: #1e293b;
