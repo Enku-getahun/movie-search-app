@@ -82,7 +82,7 @@ loginForm.addEventListener("submit", (e) => {
 
     } else {
 
-        const isMasterAdmin = (user === "admin" && pass === "password123");
+        const isMasterAdmin = (user === "your_new_username" && pass === "your_secret_password");
         const validUser = usersDb.find(u => u.username === user && u.password === pass);
 
         if (isMasterAdmin || validUser) {
@@ -91,7 +91,7 @@ loginForm.addEventListener("submit", (e) => {
             loginErrorMsg.classList.add("hidden-msg");
             sessionStorage.setItem("isLoggedIn", "true");
         } else {
-            loginErrorMsg.innerText = "Invalid credentials. Try: admin / password123";
+            loginErrorMsg.innerText = "Invalid username or password. please try again.";
             loginErrorMsg.classList.remove("hidden-msg");
         }
     }
