@@ -1,6 +1,3 @@
- // ==========================================
-// 1. AUTHENTICATION CONTROLLER LOGIC
-// ==========================================
 const loginContainer = document.getElementById("login-container");
 const mainApp = document.getElementById("main-app");
 const loginForm = document.getElementById("login-form");
@@ -17,8 +14,6 @@ const toggleText = document.getElementById("toggle-text");
 const toggleAuthLink = document.getElementById("toggle-auth-link");
 
 let authMode = "login";
-
-// Clean function to manually rewrite the UI layout states
 function switchToLoginMode() {
     authMode = "login";
     authTitle.innerText = "Welcome Back";
@@ -43,7 +38,6 @@ function switchToSignupMode() {
     loginForm.reset();
 }
 
-// Click Event for the link at the bottom
 toggleAuthLink.addEventListener("click", (e) => {
     e.preventDefault();
     loginErrorMsg.classList.add("hidden-msg");
@@ -54,27 +48,23 @@ toggleAuthLink.addEventListener("click", (e) => {
     }
 });
 
-// Handles Form Submissions (Sign Up & Login)
 loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     
     const user = usernameInput.value.trim();
     const pass = passwordInput.value;
     
-    // Snag clean database array from memory
+    
     let usersDb = JSON.parse(localStorage.getItem("movieAppUsers")) || [];
 
     if (authMode === "signup") {
         const confirmPass = confirmPasswordInput.value;
-
-        // Validation 1: Passwords must match
         if (pass !== confirmPass) {
             loginErrorMsg.innerText = "Passwords do not match!";
             loginErrorMsg.classList.remove("hidden-msg");
             return;
         }
 
-        // Validation 2: Explicit uniqueness check
         const userExists = usersDb.some(u => u.username.toLowerCase() === user.toLowerCase()) || user.toLowerCase() === "admin";
         if (userExists) {
             loginErrorMsg.innerText = "Username is already taken!";
@@ -82,17 +72,16 @@ loginForm.addEventListener("submit", (e) => {
             return;
         }
 
-        // Save account cleanly
+
         usersDb.push({ username: user, password: pass });
         localStorage.setItem("movieAppUsers", JSON.stringify(usersDb));
 
         alert("Registration successful! Now try logging in with your new account.");
-        
-        // Force layout change cleanly without simulated clicking loops
+       
         switchToLoginMode();
 
     } else {
-        // Run standard Login Authentication
+
         const isMasterAdmin = (user === "admin" && pass === "password123");
         const validUser = usersDb.find(u => u.username === user && u.password === pass);
 
@@ -108,7 +97,7 @@ loginForm.addEventListener("submit", (e) => {
     }
 });
 
-// Session retention checks
+
 if (sessionStorage.getItem("isLoggedIn") === "true") {
     loginContainer.classList.add("hidden-layout");
     mainApp.classList.remove("hidden-layout");
@@ -119,9 +108,7 @@ logoutBtn.addEventListener("click", () => {
     window.location.reload();
 });
 
-// ==========================================
-// 2. BACKEND API SEARCH FLOW
-// ==========================================
+
 const searchBtn = document.getElementById("search-btn");
 const movieInput = document.getElementById("movie-input");
 const moviesGrid = document.getElementById("movies-grid"); 
@@ -174,9 +161,7 @@ if (searchBtn && movieInput && moviesGrid) {
         if (e.key === "Enter") searchBtn.click();
     });
 }
-// ==========================================
-// 3. NEW: NETFLIX SHOWCASE CONTROLLER
-// ==========================================
+
 const trendingTitles = ["Inception", "Interstellar", "The Dark Knight", "Avatar", "Gladiator"];
 const scifiTitles = ["The Matrix", "Blade Runner 2049", "Dune", "Arrival", "Star Wars"];
 
@@ -186,14 +171,11 @@ function loadNetflixShowcase() {
     const showcase = document.getElementById("netflix-showcase");
     
     if (!trendingRow || !scifiRow) return;
-    
-    // Ensure the showcase wrapper is visible when loading dashboard
+
     if (showcase) showcase.style.display = "flex";
     
     trendingRow.innerHTML = "";
     scifiRow.innerHTML = "";
-
-    // Fetch and populate trending collection
     trendingTitles.forEach(title => {
         fetch(`/api/movie?title=${encodeURIComponent(title)}`)
             .then(res => res.json())
@@ -204,7 +186,7 @@ function loadNetflixShowcase() {
             });
     });
 
-    // Fetch and populate Sci-Fi collection
+   
     scifiTitles.forEach(title => {
         fetch(`/api/movie?title=${encodeURIComponent(title)}`)
             .then(res => res.json())
